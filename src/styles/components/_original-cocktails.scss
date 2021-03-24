@@ -1,0 +1,40 @@
+@use '../base/scrollbar';
+
+.section__original-cocktails{
+  display: flex;
+}
+
+@include scrollbar.scrollbar(drink-links);
+
+.drink-links {
+  height: 100%;
+  width: 20%;
+  border-right: .5rem silver solid;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  overflow: auto;
+}
+
+.drink-link {
+  display: block;
+  color: silver
+}
+
+@media(max-width: 520px){
+  .section__original-cocktails{
+    flex-direction: column;
+  }
+
+  .drink-links {
+    height: 5rem;
+    width: 100%;
+    border: none;
+    border-bottom: .5rem silver inset;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+}

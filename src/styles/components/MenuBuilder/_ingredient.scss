@@ -1,0 +1,34 @@
+.ingredient-form{
+  width: 100%;
+  margin-top: 1rem
+}
+
+.ingredient-name, .ingredient-unit, .ingredient-amount {
+  height: 100%
+}
+
+.ingredient-name{
+  width: 50%;
+  margin-left: 1%
+}
+
+.ingredient-amount{
+  width: 20%;
+  margin-left: 1%
+}
+
+.ingredient-unit{
+  width: 20%;
+  margin-left: 1%;
+  height: 2.76rem;
+  vertical-align: bottom;
+}
+
+#delete-ingredient{
+  display: inline-block;
+  width: 4%;
+  height: 2.76rem;
+  margin: 0 1%;
+  vertical-align: center;
+  padding: 0rem 0rem;
+}

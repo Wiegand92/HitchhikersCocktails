@@ -1,0 +1,14 @@
+@use 'settings';
+
+@mixin scrollbar($property){
+  .#{$property}::-webkit-scrollbar {
+    background-color: rgba(0, 0, 0, 0);
+    width: .5rem;
+    height: .5rem
+  }
+
+  .#{$property}::-webkit-scrollbar-thumb{
+    background-color: settings.$font-color;
+    border-radius: 2rem;
+  } 
+}

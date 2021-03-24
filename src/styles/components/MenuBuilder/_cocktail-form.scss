@@ -1,0 +1,58 @@
+@use '../../base/settings';
+@use '../../base/scrollbar';
+
+@include scrollbar.scrollbar(cocktail-form);
+
+.cocktail-form{
+  border: .2rem inset settings.$border-color;
+  border-bottom-left-radius: .5rem;
+  width: 100%;
+  height: calc(100% - 4rem);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.add-ingredient, .build-drink, .clear-drink{
+  min-width: 15rem;
+  margin: 1rem auto 0;
+}
+
+.clear-drink{
+  margin-bottom: 1rem
+}
+
+.drink-name{
+  margin: 1.8rem auto;
+  height: 3rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+label{
+  color: silver;
+  text-align: center
+}
+
+.glass-box, .garnish-box, .method-box{
+  display: flex;
+  justify-content: center;
+}
+
+.drink-glass, .drink-garnish, .drink-method{
+  width: 33%;
+  height: 2.44rem;
+}
+
+input[type='checkbox']{
+  filter: hue-rotate(60deg);
+  width: 2.5rem;
+  height: 2.44rem;
+  vertical-align: bottom;
+}
+
+@media(max-width: 500px){
+  .cocktail-form::-webkit-scrollbar{
+    width: 0
+  }
+}

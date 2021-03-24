@@ -1,0 +1,44 @@
+@use './scrollbar';
+
+:root {
+  --ck-border-radius: 0 .5rem .5rem 0;
+  --ck-color-base-background: #f2999100;
+  --ck-color-base-foreground: #421E59;
+	--ck-color-base-border: #F29991;
+	--ck-color-base-text: #F29991;
+	--ck-color-base-active: #160B26;
+	--ck-color-base-active-focus:	var(--ck-color-base-foreground);
+  --ck-color-button-action-text: var(--ck-color-base-text);
+  --ck-color-toolbar-border: #D984A3;
+  --ck-color-tooltip-background: var(--ck-color-base-foreground);
+  --ck-color-tooltip-text: var(--ck-color-base-text);
+  --ck-color-list-background: #160B26;
+  --ck-color-list-button-hover-background: var(--ck-color-base-foreground);
+	--ck-color-list-button-on-background: var(--ck-color-base-active);
+	--ck-color-list-button-on-background-focus: var(--ck-color-base-active-focus);
+	--ck-color-list-button-on-text:	var(--ck-color-base-text);
+  --ck-color-text: #F29991;
+}
+
+.ck{
+  @include scrollbar.scrollbar(ck-editor__editable)
+}
+
+.ck.ck-toolbar{
+  border: .2rem inset var(--ck-color-toolbar-border);
+}
+
+.ck.ck-editor__main{
+  min-height: 100%
+}
+
+.ck.ck-editor__main>.ck-editor__editable{
+  color: white;
+  background-color: #d984a349;
+  border: .2rem inset #D984A3;
+  height: calc(77vh - 4.95rem);
+}
+
+.ck.ck-editor__main>.ck-editor__editable:focus{
+  border: .2rem solid var(--ck-color-base-foreground) 
+}

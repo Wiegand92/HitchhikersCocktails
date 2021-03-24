@@ -1,0 +1,102 @@
+@use '../../base/scrollbar';
+@use '../../base/settings';
+
+@include scrollbar.scrollbar(cost-calculator);
+
+// Main div of page
+
+.cost-calculator{
+  border: .2rem inset settings.$border-color;
+  color: #c0c0c0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  height: calc(100% - 4rem);
+  overflow: auto;
+
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    form {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      width: 80%
+    }
+
+    .drink-price__label{
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+    
+      input{
+        width: 10rem;
+        margin-left: 1rem
+      }
+    }
+
+    .ingredient--cost{
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 2rem
+    }
+    
+    .cost-preview{
+      width: 50%;
+      margin: auto;
+    }
+    
+    .bottle-size{
+      width: 30%
+    }
+    
+    .bottle-unit__select{
+      -webkit-appearance: menulist-button;
+      width: 100%;
+      height: 2.44rem;
+      vertical-align: bottom;
+    }
+    
+    .bottle-cost{
+      width: 30%
+    }
+    
+    .print-cost{
+      margin: auto
+    }
+    
+    .should-cost{
+      margin-top: 1.8rem;
+      filter: hue-rotate(60deg)
+    }
+}
+
+
+@media(max-width: 500px){
+  .cost-calculator::-webkit-scrollbar{
+    width: 0;
+  }
+}
+
+@media(max-width: 350px){
+  .cost-calculator{
+    display: flex;
+    flex-direction: column;
+  
+    label {
+      width: 100%;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-end;
+      width: 80%
+    }
+  
+  }
+}

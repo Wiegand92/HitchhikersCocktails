@@ -1,0 +1,56 @@
+@use '../base/settings';
+@use 'sass:color';
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-items: center;
+  opacity: 0.95;
+  height: 13rem;
+  width: 99%;
+  margin: 0 auto 1rem;
+  padding-top: 1rem
+}
+
+header div.hero-image{
+  background-image: url("~/public/images/header.png");
+  background-size: cover;
+  height: 66%;
+  border: 5px outset silver;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: none;
+}
+
+header .navbar{
+  height: 33%;
+  top: 0px;
+  display: inline-flex;
+  align-items: center;
+  justify-content:space-around;
+  background-color: color.scale(settings.$secondary-background-color, $lightness: -50%);
+  border: 5px outset silver;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: none;
+  text-decoration: underline;
+  text-decoration-color: black;
+}
+
+.title{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: silver;
+  background-color: #000000a2;
+  margin: 0 auto;
+}
+
+.link{
+  color: silver;
+  transition: color 500ms ease-in, font-weight 200ms ease-in
+}
