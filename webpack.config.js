@@ -48,8 +48,8 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.s?css$/,
-        exclude: /node_modules/,
+        test: /\.scss$/,
+        exclude: [/node_modules/, /custom\.scss/],
         use: [
           //If we're in dev-mode, use inline-styles, else extract to separate css file
           devMode ? 'style-loader' : {
@@ -61,7 +61,16 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ]
-      } 
+      },
+      {
+        test: /custom\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }
     ]
   },
   devServer: {
