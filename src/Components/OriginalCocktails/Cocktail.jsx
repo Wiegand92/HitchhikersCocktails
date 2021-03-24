@@ -17,7 +17,7 @@ const Cocktail = (props) => (
       <p><strong>Garnish:</strong> {props.cocktail.garnish}</p>
       <p><strong>Method:</strong> {props.cocktail.drinkMethod}</p>
     </ul>
-    <p className='description'>{props.cocktail.description} here is some more text .</p>
+    <p className='description'>{props.cocktail.description}</p>
   </div>
 )
 

@@ -23,6 +23,7 @@ const Bottle = (props) => {
           <input
             disabled={props.dontCost.includes(props.ingredient.id)}
             value={props.ingredient.size}
+            min='0'
             onChange={e => {
               const newSize = e.target.value
               const ingredients = props.bottles.map(oldIngredient => {
@@ -69,6 +70,7 @@ const Bottle = (props) => {
           <input
             disabled={props.dontCost.includes(props.ingredient.id)} 
             type='number' 
+            min='0'
             value={props.ingredient.cost}
             onChange={e => {
               const newCost = e.target.value

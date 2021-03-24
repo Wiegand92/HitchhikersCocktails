@@ -23,13 +23,10 @@ const CostCalculator = (props) => {
     
     const JSXArray = mapBottlesToText(props.bottles, props.dontCost, props.drinkCost, props.drinkName)
     const costArray = []
-    console.log(JSXArray.length - 1)
 
     for (let i = JSXArray.length - 1; i >= 0; i--) {
       costArray.push(JSXArray[i])
     }
-
-    console.log(costArray)
 
     return costArray
   }
@@ -85,7 +82,7 @@ const CostCalculator = (props) => {
           name='drink-price'
           type='number' 
           value={props.drinkCost}
-          step='.01'
+          min='0'
           onChange={(e) => {props.setDrinkCost(e.target.value)}}  
         />
       </label>

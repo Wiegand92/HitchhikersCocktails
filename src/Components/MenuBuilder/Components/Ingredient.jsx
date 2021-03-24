@@ -36,6 +36,7 @@ return (
         className='ingredient-amount'
         type='number' 
         value={amount} 
+        min='0'
         onChange={e => {
           setAmount(e.target.value)
         } }
