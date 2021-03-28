@@ -3,30 +3,15 @@ import React, { useState } from 'react'
 import mapBottlesToText from '../utils/mapBottlesToText'
 import Bottle from './Bottle'
 
-// Will take in just ingredients from drink, and the editorData/setEditorData
-// Need separate file for calculations
-  // Between unit types, then cost percentage
-  // After calculation print an informative message on the price per ingredient,
-  // and total cost if a price is supplied
-
-  // Needs to return a form for each ingredient
-    // Ingredient name as the label
-    // Input for bottle size
-    // Input for bottle cost
-    // Input at the top for the drink cost
-    // Paragraph at bottom showing the output of the calculator
-    // Button to add cost information to the menu
-
 const CostCalculator = (props) => {
+
+  const [drinkCost, setDrinkCost] = useState(props.drinkCost)
 
   const reorderCostArray = () => {
     
     const JSXArray = mapBottlesToText(props.bottles, props.dontCost, props.drinkCost, props.drinkName)
-    const costArray = []
-
-    for (let i = JSXArray.length - 1; i >= 0; i--) {
-      costArray.push(JSXArray[i])
-    }
+    //Last element is header, 2nd to last is sub header, spread out rest
+    const costArray = [JSXArray.pop(), JSXArray.pop(), ...JSXArray]
 
     return costArray
   }
@@ -66,7 +51,7 @@ const CostCalculator = (props) => {
       }
     })
 
-    props.setEditorData(props.editorData.concat(newText))
+    props.setEditorData(prevState => prevState.concat(newText))
 
   }
 
@@ -81,9 +66,10 @@ const CostCalculator = (props) => {
         Drink Price(USD): <input 
           name='drink-price'
           type='number' 
-          value={props.drinkCost}
+          value={drinkCost}
           min='0'
-          onChange={(e) => {props.setDrinkCost(e.target.value)}}  
+          onChange={(e) => setDrinkCost(e.target.value)}
+          onBlur={() => props.setDrinkCost(drinkCost)}  
         />
       </label>
       {props.bottles.map(ingredient => (

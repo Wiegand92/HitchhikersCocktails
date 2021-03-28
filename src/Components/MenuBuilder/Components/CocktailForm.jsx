@@ -10,6 +10,9 @@ const CocktailForm = (props) => {
   const [ useGarnish, setUseGarnish ] = useState(true)
   const [ useGlass, setUseGlass ] = useState(true)
   const [ useMethod, setUseMethod ] = useState(true)
+  const [ drinkName, setDrinkName ] = useState(props.drink.cocktailName)
+  const [ glass, setGlass ] = useState(props.drink.glass)
+  const [ garnish, setGarnish ] = useState(props.drink.garnish)
 
   return (
     <div className="cocktail-form">
@@ -17,8 +20,9 @@ const CocktailForm = (props) => {
       <input 
         type='text'
         className='drink-name'
-        value={props.drink.cocktailName}
-        onChange={(e) => props.setDrink({ ...props.drink, cocktailName: e.target.value})}
+        value={drinkName}
+        onChange={e => setDrinkName(e.target.value)}
+        onBlur={(e) => props.setDrink(prevState => ({ ...prevState, cocktailName: drinkName}))}
       />
 
       {/* Map each ingredient to separate ingredient component. Pass down drink, & set drink. */}
@@ -39,11 +43,10 @@ const CocktailForm = (props) => {
           className='drink-glass'
           name='glass' 
           disabled={!useGlass}
-          value={props.drink.glass} 
+          value={glass} 
           list='glasses'
-          onChange={e => {
-            props.setDrink({...props.drink, glass:e.target.value})
-          }}
+          onChange={e => setGlass(e.target.value)}
+          onBlur={e => {props.setDrink(prevState => ({ ...prevState, glass:glass }) )}}
         />
         {/* Do you want to include the glass in your recipe? */}
         <input 
@@ -71,17 +74,16 @@ const CocktailForm = (props) => {
           className='drink-garnish'
           disabled={!useGarnish}
           type="text"
-          value={props.drink.garnish}
-          onChange={e => {
-            props.setDrink({...props.drink, garnish: e.target.value})
-          }}
+          value={garnish}
+          onChange={e => setGarnish(e.target.value)}
+          onBlur={e => {props.setDrink(prevState => ({...prevState, garnish: garnish}))}}
         />
         {/* Do you want to include the garnish in your recipe? */}
         <input 
           type="checkbox"
           checked={useGarnish}
           onChange={() => {
-            setUseGarnish(!useGarnish)
+            setUseGarnish(prevState => !prevState)
           }}
         />
       </div>
@@ -95,7 +97,7 @@ const CocktailForm = (props) => {
           disabled={!useMethod}
           value={props.drink.method}
           onChange={e => {
-            props.setDrink({...props.drink, method: e.target.value})
+            props.setDrink(prevState => ({...prevState, method: e.target.value}))
           }} 
         >
           <option value="shaken">Shaken</option>
@@ -107,7 +109,7 @@ const CocktailForm = (props) => {
           type="checkbox"
           checked={useMethod}
           onChange={ () => {
-            setUseMethod(!useMethod)
+            setUseMethod(prevState => !prevState)
           }}
         />
       </div>
@@ -118,7 +120,7 @@ const CocktailForm = (props) => {
         onClick={e => {
           const ingredients = props.drink.ingredients
           ingredients.push({...emptyIngredient, id: uuidv4()})
-          props.setDrink({...props.drink, ingredients})
+          props.setDrink(prevState => ({...prevState, ingredients}))
         }}
       >Add Ingredient</button>
 
@@ -130,7 +132,7 @@ const CocktailForm = (props) => {
           // Convert drink object to text for CKEditor
           const drinkText = mapDrinkToText(props.drink, useGarnish, useGlass, useMethod)
           // Add the new drink to the editor
-          props.setEditorData(`${props.editorData.concat(drinkText)}`)
+          props.setEditorData(prevState => `${prevState.concat(drinkText)}`)
         }}
       >Build My Drink!</button>
 

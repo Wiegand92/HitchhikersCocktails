@@ -63,11 +63,20 @@ module.exports = {
         ]
       },
       {
+        //Custom Styles for CKEditor need to stay inline
         test: /custom\.scss$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
           'css-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: ["postcss-preset-env"],
+              },
+            },
+          },
           'sass-loader'
         ]
       }

@@ -1,11 +1,12 @@
 {
-  "name": "boilerplate",
+  "name": "hitchhikers-cocktails",
   "version": "1.0.0",
-  "description": "Boilerplate for basic html site",
+  "description": "A website to build your menu and browse cocktails.",
   "main": "./src/index.js",
   "scripts": {
     "dev-server": "webpack serve --mode development",
-    "build": "cross-env NODE_ENV=production webpack --mode production"
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "get-stats": "webpack --profile --json > stats.json"
   },
   "author": "Alex Wiegand",
   "license": "ISC",
@@ -19,6 +20,9 @@
     "cross-env": "^7.0.3",
     "css-loader": "5.0.2",
     "mini-css-extract-plugin": "^1.3.9",
+    "postcss": "^8.2.6",
+    "postcss-loader": "^5.2.0",
+    "postcss-preset-env": "^6.7.0",
     "sass": "1.32.8",
     "sass-loader": "11.0.1",
     "source-map-loader": "2.0.1",

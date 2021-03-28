@@ -1,0 +1,13 @@
+.loading, .section__loading{
+  align-content: center;
+  justify-content: center;
+  color: silver;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.loading{
+  height: 100%;
+  width: 100%;
+}

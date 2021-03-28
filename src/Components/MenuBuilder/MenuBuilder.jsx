@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React, { useState, useEffect, Suspense } from 'react'
 
-import '../../styles/base/custom.scss'
 import { emptyCocktail } from './utils/calculatorFixtures'
-import CocktailForm from './Components/CocktailForm';
-import CostCalculator from './Components/CostCalculator'
+import LoadingPage from '../LoadingPage/LoadingPage'
+
+const CKEditor = React.lazy( () => import('./Components/CKEditor'))
+const CocktailForm = React.lazy(() => import('./Components/CocktailForm'));
+const CostCalculator = React.lazy(() => import('./Components/CostCalculator'))
 
 const CocktailCalculator = () => {
 
@@ -27,9 +27,6 @@ const CocktailCalculator = () => {
 
   // Holds the string representation of editor data
   const [ editorData, setEditorData ] = useState("<h1>My Cocktails</h1>")
-  
-  //Is the editor currently being used?
-  const [ editorFocus, setEditorFocus ] = useState(false)
 
   // When the drink ingredients change, the bottles update
   useEffect(() => {
@@ -52,6 +49,42 @@ const CocktailCalculator = () => {
     setBottles([...newBottles])
   }, [drink])
 
+  const LazyCocktailForm = () => (
+    <Suspense fallback={<LoadingPage inline={true} />}>
+      <CocktailForm
+        drink={drink}
+        setDrink={setDrink}
+        editorData={editorData}
+        setEditorData={setEditorData}
+      />
+    </Suspense>
+  )
+
+  const LazyCostCalculator = () => (
+    <Suspense fallback={<LoadingPage inline={true} />}>
+      <CostCalculator
+        drinkName={drink.cocktailName}
+        drinkCost={drinkPrice}
+        setDrinkCost={setDrinkPrice}
+        dontCost={dontCost}
+        setDontCost={setDontCost}
+        editorData={editorData}
+        setEditorData={setEditorData}
+        bottles={bottles}
+        setBottles={setBottles}
+      />
+    </Suspense>
+  )
+
+  const LazyCKEditor = () => (
+    <Suspense fallback={<LoadingPage inline={true} />}>
+        <CKEditor
+          editorData={editorData}
+          setEditorData={setEditorData}
+        />
+    </Suspense>
+  )
+
 
   return (
     <main className='section__cocktail-calculator'>
@@ -68,43 +101,10 @@ const CocktailCalculator = () => {
         </select>
         
         {/* Switch between cost calculator or cocktail form based on the utility state */}
-        { utility === 'cocktail-form' ?
-          <CocktailForm
-            drink={drink}
-            setDrink={setDrink}
-            editorData={editorData}
-            setEditorData={setEditorData}
-          /> :
-          <CostCalculator
-            drinkName={drink.cocktailName}
-            drinkCost={drinkPrice}
-            setDrinkCost={setDrinkPrice}
-            dontCost={dontCost}
-            setDontCost={setDontCost}
-            editorData={editorData}
-            setEditorData={setEditorData}
-            bottles={bottles}
-            setBottles={setBottles}
-          />
-        }
+        { utility === 'cocktail-form' ? <LazyCocktailForm/> : <LazyCostCalculator/> }
       </div>
       <div className="column-two">
-        <CKEditor
-            editor={ ClassicEditor }
-            data={ editorData }
-            onFocus={ () => {
-              setEditorFocus(true)
-            } }
-            onChange={ ( event, editor ) => {
-              if(editorFocus){
-                const data = editor.getData()
-                setEditorData(data)
-              }
-            } }
-            onBlur={() => {
-              setEditorFocus(false)
-            } }
-        />
+        <LazyCKEditor/>
       </div>
     </main>
   )
